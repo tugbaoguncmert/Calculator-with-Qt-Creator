@@ -3,6 +3,7 @@
 #include "QDebug"
 
 double erstenummer;
+bool userIsTypingSecondNumber;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -41,8 +42,11 @@ void MainWindow::digit_pressed()
     QPushButton * button = (QPushButton*) sender();
     double labelnumber;
 
-    if(ui->pushButton_addieren->isChecked() || ui->pushButton_subtrahieren->isChecked() || ui->pushButton_multiplizieren->isChecked() || ui->pushButton_teilen->isChecked()){
+    if((ui->pushButton_addieren->isChecked() || ui->pushButton_subtrahieren->isChecked() ||
+       ui->pushButton_multiplizieren->isChecked() || ui->pushButton_teilen->isChecked()) && (! userIsTypingSecondNumber)){
+
         labelnumber = (button->text()).toDouble();
+        userIsTypingSecondNumber = true;
     }else{
         labelnumber = (ui->label->text() + button->text()).toDouble();
     }
@@ -89,7 +93,14 @@ void MainWindow::on_pushButton_prozent_clicked()
 //Slot Function of klarButton
 void MainWindow::on_pushButton_klar_clicked()
 {
+    ui->pushButton_addieren->setCheckable(false);
+    ui->pushButton_subtrahieren->setCheckable(false);
+    ui->pushButton_multiplizieren->setCheckable(false);
+    ui->pushButton_teilen->setCheckable(false);
 
+    userIsTypingSecondNumber = false;
+
+    ui->label->setText("0");
 }
 
 //Slot Function of =
@@ -131,6 +142,7 @@ void MainWindow::on_pushButton_gleich_clicked()
         ui->pushButton_teilen->setChecked(false);
     }
 
+    userIsTypingSecondNumber = false;
 }
 //Slot Function of +-/*
 void MainWindow::on_pushButton_addieren_clicked()
