@@ -21,5 +21,14 @@ private:
 
 private slots:
     void digit_pressed();
+    void on_pushButton_dezimal_clicked();
+    void on_pushButton_PlusMinus_clicked();
+    void on_pushButton_prozent_clicked();
+    void on_pushButton_klar_clicked();
+    void on_pushButton_gleich_clicked();
+    void on_pushButton_addieren_clicked();
+    void on_pushButton_subtrahieren_clicked();
+    void on_pushButton_multiplizieren_clicked();
+    void on_pushButton_teilen_clicked();
 };
 #endif // MAINWINDOW_H
